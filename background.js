@@ -1,4 +1,4 @@
-importScripts('./securityRules.js');
+importScripts('./main.js');
 
 let activeTabId, previousUrl, lastUrl, lastTitle;
 
@@ -7,12 +7,13 @@ function runChromeScript(tabId){
         target: {
             tabId: tabId
         },
-        function: applySecurityRules,
+        function: run
     });
 }
 
 function getTabInfo(tabId) {
 	chrome.tabs.get(tabId, function(tab) {
+        if(tab.url.indexOf('chrome') != -1) return;
 		if (lastUrl != tab.url || lastTitle != tab.title) {
             lastUrl = tab.url;
             if(lastUrl !== previousUrl) {
