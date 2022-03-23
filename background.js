@@ -29,8 +29,5 @@ chrome.tabs.onActivated.addListener(function(activeInfo) {
 });
 
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
-	// if (activeTabId == tabId) {
-	// 	getTabInfo(tabId);
-	// }
     getTabInfo(tabId);
 });
