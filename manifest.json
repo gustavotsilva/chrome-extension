@@ -1,6 +1,6 @@
 {
-    "name": "Origin Security Extension",
-    "description": "We are working to ensure you can protect your browser against online threats, trackers, and scams.",
+    "name": "Origin Employees Extension",
+    "description": "This extension aims to enrich the experience of Origin Employees on Google Chrome.",
     "version": "1.0",
     "manifest_version": 3,
     "background": {
