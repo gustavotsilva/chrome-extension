@@ -12,7 +12,18 @@ const run = () => {
     
         window.addEventListener("DOMContentLoaded", () => removeButtons());
     
-        if(isUrlUsersInProd()) navigateToHome()
+        if(isUrlUsersInProd()) navigateToHome();
+
+        setInterval(() => {
+
+            const isUrlProd         = () => window.location.pathname.indexOf('default/production') !== -1;
+            const modalUserDetails  = document.querySelector('div.DataList.UserPopover');
+            const modalExists       = () => modalUserDetails !== null;
+
+            if(isUrlProd() && modalExists()) modalUserDetails.remove();
+
+        }, 1000);
+        
 
     }
 
