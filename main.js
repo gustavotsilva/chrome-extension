@@ -14,6 +14,7 @@ const run = () => {
     
         if(isUrlUsersInProd()) navigateToHome();
 
+        //It shows when you click on a user profile inside an experiment
         setInterval(() => {
 
             const isUrlProd         = () => window.location.pathname.indexOf('default/production') !== -1;
@@ -23,7 +24,26 @@ const run = () => {
             if(isUrlProd() && modalExists()) modalUserDetails.remove();
 
         }, 1000);
-        
+
+        //Hiding the menu with email list
+        setInterval(() => {
+
+            const isUrlProd             = () => window.location.pathname.indexOf('default/production') !== -1;
+            const isChangingExperiment  = () => window.location.pathname.indexOf('features') !== -1 && window.location.pathname.indexOf('targeting') !== -1;
+
+            if(!isUrlProd() || !isChangingExperiment()) return;
+
+            const filterDynamicFields   = Array.from(document.querySelectorAll(".css-wf3i3w-singleValue"));
+            const isFilteringEmail      = () => filterDynamicFields.filter(element => element.innerHTML.indexOf('email') != -1).length > 0;
+            const menuSelector          = document.querySelector('.css-1qlmf8c-menu');
+            const isMenuSelector        = () => document.querySelector('.css-1qlmf8c-menu') !== null;
+            const isMenuSelectionEmail  = () => isMenuSelector() ? menuSelector.innerHTML.indexOf('@') !== -1 : false;
+
+            
+                    if(isFilteringEmail() && isMenuSelectionEmail())  menuSelector.style.display = 'none';
+            else    if(isMenuSelector())                              menuSelector.style.display = 'block';
+
+        }, 1);
 
     }
 
